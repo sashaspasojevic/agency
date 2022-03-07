@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap");
+
+$fontFamily: "Poppins", sans-serif;
+$fontSize: 16px;
+$tamnoPlava: #003568;
+$svetloPlava: #92e0f9;
+$tamnoSiva: #20333b;
+$tamnoCrvena: #ff5a57;
+$svetloCrvena: #ff9b9a;
+$svetloSiva: #def2fa;
+$bela: #fff;
+$transition: 0.4s ease;
+$padding: 60px 0;
+
+/*********************
+mixin
+**********************/
+
+@mixin buttonStyle(
+  $fontColor: $tamnoSiva,
+  $borderColor: $tamnoSiva,
+  $fontColorHover: $svetloCrvena,
+  $borderColorHover: $svetloCrvena
+) {
+  background-color: transparent;
+  color: $fontColor;
+  border: 2px solid $borderColor;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 15px 30px;
+  overflow: hidden;
+  margin-top: 20px;
+
+  transition: 0.5 ease;
+  &:hover {
+    color: $fontColorHover;
+    border: 2px solid $borderColorHover;
+    cursor: pointer;
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == "phone" {
+    @media only screen and (min-width: 200px) and (max-width: 650px) {
+      @content; //css pravila
+    }
+  } @else if $breakpoint == "tablet" {
+    @media only screen and (min-width: 651px) and (max-width: 896px) {
+      @content;
+    }
+  }
+}
+
+/*****************
+basic styles
+*****************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  color: $tamnoSiva;
+  font-weight: 300;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+  @include breakpoint(phone) {
+    width: 90%;
+  }
+  @include breakpoint(tablet) {
+    width: 90%;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+h2 {
+  font-size: 3rem;
+  color: $tamnoPlava;
+  @include breakpoint(phone) {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+h2::after {
+  display: block;
+  content: "";
+  width: 100px;
+  height: 5px;
+  background: $tamnoPlava;
+  margin: 10px 0 30px 0;
+  @include breakpoint(phone) {
+    margin: 10px auto 30px auto;
+  }
+}
+
+hr {
+  display: block;
+  content: "";
+  border: none;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    $tamnoPlava,
+    $svetloPlava,
+    $svetloCrvena,
+    $tamnoCrvena
+  );
+  margin: 50px 0;
+}
+
+/*********************
+navbar
+**********************/
+nav {
+  background-color: $svetloSiva;
+  padding: 5px 0;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include breakpoint(phone) {
+      display: block;
+      text-align: center;
+    }
+    .logo a {
+      color: $tamnoCrvena;
+      font-weight: 700;
+      font-size: 2rem;
+      @include breakpoint(phone) {
+        font-size: 1.5rem;
+      }
+    }
+
+    ul {
+      display: flex;
+      @include breakpoint(phone) {
+        display: block;
+        text-align: center;
+      }
+      li {
+        margin-left: 30px;
+        @include breakpoint(phone) {
+          margin: 0;
+          padding: 15px;
+        }
+        a {
+          color: $tamnoSiva;
+          &:hover {
+            color: $svetloCrvena;
+          }
+        }
+      }
+    }
+  }
+}
+/*********************
+header
+**********************/
+
+header {
+  padding: 150px 0 200px 0;
+
+  //   height: 80vh;
+  background: linear-gradient(45deg, $tamnoCrvena, $svetloPlava);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+  @include breakpoint(phone) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    text-align: center;
+  }
+  @include breakpoint(tablet) {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    // text-align: center;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $bela;
+    .header_leftSide {
+      h1 {
+        text-transform: uppercase;
+      }
+      button {
+        @include buttonStyle($bela, $bela, $tamnoSiva, $tamnoSiva);
+        @include breakpoint(phone) {
+          margin: 20px auto 0 auto;
+        }
+      }
+    }
+    @include breakpoint(phone) {
+      .header_rightSide {
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/*********************
+about us
+**********************/
+.about {
+  padding: $padding;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  @include breakpoint(phone) {
+    text-align: center;
+  }
+  .header_leftSide {
+    flex: 0 0 58%;
+    @include breakpoint(phone) {
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+      p {
+        text-align: justify;
+      }
+    }
+    button {
+      @include buttonStyle();
+    }
+  }
+
+  .header_rightSide {
+    flex: 0 0 38%;
+    @include breakpoint(phone) {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+/*********************
+services
+**********************/
+.services {
+  padding: $padding;
+  text-align: center;
+
+  h2 {
+    //     margin: auto;
+    &::after {
+      margin: 10px auto 30px auto;
+    }
+  }
+
+  .services_articles {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    article {
+      flex: 0 0 31%;
+      @include breakpoint(phone) {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+      }
+      border-radius: 10px;
+      background-color: $svetloSiva;
+      .services_articles__i {
+        background-color: $tamnoPlava;
+        color: $bela;
+        padding: 20px;
+        border-radius: 10px 10px 0 0;
+        i {
+          font-size: 1.7rem;
+        }
+      }
+
+      .services_articles__text {
+        padding: 30px;
+        p {
+          text-align: justify;
+          letter-spacing: 1px;
+        }
+        @include breakpoint(phone) {
+          padding: 15px;
+          h3 {
+            padding: 10px;
+          }
+          p {
+            text-align: start;
+          }
+        }
+        @include breakpoint(tablet) {
+          p {
+            text-align: justify;
+          }
+        }
+      }
+
+      button {
+        @include buttonStyle($tamnoPlava, $tamnoPlava);
+      }
+    }
+  }
+}
+
+/*********************
+contact
+**********************/
+
+.contact {
+  background-color: $tamnoPlava;
+  color: $bela;
+  clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0% 100%);
+  padding: 150px 0 80px 0;
+  @include breakpoint(phone) {
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    padding: 20px 5px;
+  }
+  h2 {
+    color: $bela;
+    text-align: center;
+
+    &::after {
+      margin: 10px auto 30px auto;
+      background: $bela;
+    }
+  }
+
+  .contact_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0 100px;
+    @include breakpoint(phone) {
+      flex-wrap: wrap;
+      padding: 30px 0;
+    }
+    .contact_map {
+      flex: 0 0 48%;
+      @include breakpoint(phone) {
+        order: 5;
+        flex: 0 0 100%;
+      }
+    }
+    .contact_adress {
+      flex: 0 0 43%;
+      @include breakpoint(phone) {
+        flex: 0 0 100%;
+        h3 {
+          text-align: center;
+        }
+      }
+      h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 20px;
+        i {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+
+/*********************
+footer
+**********************/
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: $svetloSiva;
+  color: $tamnoPlava;
+}
